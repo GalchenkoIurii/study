@@ -664,6 +664,19 @@ let listMovies = document.querySelector('.list-movies');
   renderList(tempArray);
 } */
 
+
+let inTheaters = document.querySelector('.btn-in-theaters');
+inTheaters.addEventListener('click', filterInTheaters);
+function filterInTheaters() {
+    listMovies.innerHTML = '';
+    let tempArray = tempData.data.movies;
+    tempArray = tempArray.filter((film) => {
+        return film.year === "1994";
+});
+    renderInRows(tempArray, 4);
+}
+
+
 function filmCard(film) {
   let html = `
   <div class="card col s3">

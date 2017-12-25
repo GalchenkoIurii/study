@@ -629,11 +629,11 @@ let filmContainer = document.querySelector('.filmContainer');
 
 function createFilmCard(film) {
     let genres = film.genres.join(", ");
-    let directors = film.directors.map(element => { 
+    let directors = film.directors.map(element => {
         let str = '';
         return str += " " + element.name;
     });
-    let writers = film.writers.map(element => { 
+    let writers = film.writers.map(element => {
         let str = '';
         return str += " " + element.name;
     });
@@ -663,6 +663,6 @@ function createFilmCard(film) {
   </div>
     `;
     filmContainer.insertAdjacentHTML('beforeend', html);;
-  }
+}
 
 createFilmCard(tempData.data.movies[localStorage.getItem("filmIndex")]);

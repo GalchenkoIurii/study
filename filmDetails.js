@@ -1,4 +1,4 @@
-tempData = {
+let tempData = {
     "data": {
         "movies": [{
             "title": "The Shawshank Redemption",

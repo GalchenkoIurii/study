@@ -1,3 +1,5 @@
+function filmDetails() {
+
 let tempData = {
     "data": {
         "movies": [{
@@ -625,7 +627,16 @@ let tempData = {
     }
 };
 
-let filmContainer = document.querySelector('.filmContainer');
+let filmContainer = document.querySelector('.list-movies');
+filmContainer.innerHTML = null;
+
+console.log(urlToString(window.location.hash));
+    
+function urlToString(url) {
+    return url.slice(1).replace(/%20/g, " ");
+}
+    
+console.log(tempData.data.movies[tempData.data.movies.findIndex(item => item.title === urlToString(window.location.hash))]);
 
 function createFilmCard(film) {
     let genres = film.genres.join(", ");
@@ -637,8 +648,8 @@ function createFilmCard(film) {
         let str = '';
         return str += " " + element.name;
     });
-    let html = `
-    <div class="col s12 m7">
+    let html = 
+    `<div class="col s12 m7">
     <h2 class="header">${film.title} (${film.year})</h2>
     <div class="card horizontal">
       <div class="card-image">
@@ -660,9 +671,11 @@ function createFilmCard(film) {
         </div>
       </div>
     </div>
-  </div>
-    `;
-    filmContainer.insertAdjacentHTML('beforeend', html);;
+  </div>`;
+    filmContainer.insertAdjacentHTML('beforeend', html);
+}
+    
+createFilmCard(tempData.data.movies[tempData.data.movies.findIndex(item => item.title === urlToString(window.location.hash))]);
 }
 
-createFilmCard(tempData.data.movies[localStorage.getItem("filmIndex")]);
+export default filmDetails;

@@ -1,3 +1,12 @@
-import main from "./js/main";
+import mainJS from "./js/main";
+import filmDetails from "./js/filmDetails";
 
-main();
+if (window.location.hash === "") {
+    window.location.hash = "#main";
+}
+
+if (window.location.hash === "#main") {
+    mainJS();
+}   else {
+    filmDetails();
+}   

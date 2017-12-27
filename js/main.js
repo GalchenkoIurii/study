@@ -1,4 +1,4 @@
-
+function mainJS() {
 let tempData = {
   "data": {
     "movies": [{
@@ -637,6 +637,7 @@ let tempData = {
 console.log(tempData);
 
 let listMovies = document.querySelector('.list-movies');
+listMovies.innerHTML = null;
 
 /* function filterByYear() {
   listMovies.innerHTML = null;
@@ -688,7 +689,7 @@ function filmCard(film) {
   <p>Director: ${film.directors[0].name}</p>    
   </div>
   <div class="card-action">
-  <a class="filmPageLink" name="${film.title}" href="filmDetails.html">Show film page</a>
+  <a class="filmPageLink" name="${film.title} href="" >Show film page</a>
   </div>
   <div class="card-reveal">
     <span class="card-title grey-text text-darken-4">${film.title}<i class="material-icons right">close</i></span>
@@ -730,9 +731,14 @@ function renderList(list) {
   });
 }
 
-function goToFilmPage() {
-  localStorage.setItem("filmTitle", this.name);
-  localStorage.setItem("filmIndex", tempData.data.movies.findIndex(item => item.title === this.name));
+function goToFilmPage(event) {
+    event.preventDefault();
+  window.location.hash = this.name;
+/*  localStorage.setItem("filmTitle", this.name);
+  localStorage.setItem("filmIndex", tempData.data.movies.findIndex(item => item.title === window.location.hash));*/
 }
 
 renderInRows(tempData.data.movies, 4);
+}
+
+export default mainJS;

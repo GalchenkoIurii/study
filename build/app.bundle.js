@@ -80,15 +80,19 @@ var _filmDetails2 = _interopRequireDefault(_filmDetails);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-if (window.location.hash === "") {
-    window.location.hash = "#main";
+function init() {
+    if (window.location.hash === "") {
+        window.location.hash = "#main";
+    }
+
+    if (window.location.hash === "#main") {
+        (0, _main2.default)();
+    } else {
+        (0, _filmDetails2.default)();
+    }
 }
 
-if (window.location.hash === "#main") {
-    (0, _main2.default)();
-} else {
-    (0, _filmDetails2.default)();
-}
+init();
 
 /***/ }),
 /* 1 */
@@ -741,33 +745,6 @@ function mainJS() {
   var listMovies = document.querySelector('.list-movies');
   listMovies.innerHTML = null;
 
-  /* function filterByYear() {
-    listMovies.innerHTML = null;
-    let tempArray = tempData.data.movies;
-    tempArray = tempArray.filter((film) => {
-      return film.year >= yearFrom.value && film.year <= yearTo.value;
-    });
-    renderList(tempArray);
-  } */
-
-  /* function searchByName() {
-    listMovies.innerHTML = null;
-    let tempArray = tempData.data.movies;
-    tempArray = tempArray.filter((film) => {
-      return film.title.indexOf(this.value) >= 0;
-    });
-    renderList(tempArray);
-  } */
-
-  /* function sortByName() {
-    listMovies.innerHTML = null;
-    tempArray = tempData.data.movies;
-    tempArray.sort((a, b) => {
-      return a.title > b.title ? 1 : -1;
-    });
-    renderList(tempArray);
-  } */
-
   var inTheaters = document.querySelector('.btn-in-theaters');
   inTheaters.addEventListener('click', filterInTheaters);
   function filterInTheaters() {
@@ -780,7 +757,7 @@ function mainJS() {
   }
 
   function filmCard(film) {
-    var html = "\n  <div class=\"card col s3\">\n  <div class=\"card-image waves-effect waves-block waves-light\">\n    <img class=\"activator\" src=" + film.urlPoster + ">\n  </div>\n  <div class=\"card-content\"><span class=\"card-title activator grey-text text-darken-4\">" + film.title + " (" + film.year + ")<i class=\"material-icons right\">more_vert</i></span>\n  <p>Director: " + film.directors[0].name + "</p>    \n  </div>\n  <div class=\"card-action\">\n  <a class=\"filmPageLink\" name=\"" + film.title + " href=\"\" >Show film page</a>\n  </div>\n  <div class=\"card-reveal\">\n    <span class=\"card-title grey-text text-darken-4\">" + film.title + "<i class=\"material-icons right\">close</i></span>\n    <p>" + film.plot + "</p>\n  </div>\n  </div>\n  ";
+    var html = "\n  <div class=\"card col s3\">\n  <div class=\"card-image waves-effect waves-block waves-light\">\n    <img class=\"activator\" src=" + film.urlPoster + ">\n  </div>\n  <div class=\"card-content\"><span class=\"card-title activator grey-text text-darken-4\">" + film.title + " (" + film.year + ")<i class=\"material-icons right\">more_vert</i></span>\n  <p>Director: " + film.directors[0].name + "</p>    \n  </div>\n  <div class=\"card-action\">\n  <a class=\"filmPageLink\" name=\"" + film.title + "\" >Show film page</a>\n  </div>\n  <div class=\"card-reveal\">\n    <span class=\"card-title grey-text text-darken-4\">" + film.title + "<i class=\"material-icons right\">close</i></span>\n    <p>" + film.plot + "</p>\n  </div>\n  </div>\n  ";
     return html;
   }
 
@@ -820,10 +797,8 @@ function mainJS() {
   }
 
   function goToFilmPage(event) {
-    event.preventDefault();
     window.location.hash = this.name;
-    /*  localStorage.setItem("filmTitle", this.name);
-      localStorage.setItem("filmIndex", tempData.data.movies.findIndex(item => item.title === window.location.hash));*/
+    window.location.reload();
   }
 
   renderInRows(tempData.data.movies, 4);

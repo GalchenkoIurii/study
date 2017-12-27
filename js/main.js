@@ -639,34 +639,6 @@ console.log(tempData);
 let listMovies = document.querySelector('.list-movies');
 listMovies.innerHTML = null;
 
-/* function filterByYear() {
-  listMovies.innerHTML = null;
-  let tempArray = tempData.data.movies;
-  tempArray = tempArray.filter((film) => {
-    return film.year >= yearFrom.value && film.year <= yearTo.value;
-  });
-  renderList(tempArray);
-} */
-
-/* function searchByName() {
-  listMovies.innerHTML = null;
-  let tempArray = tempData.data.movies;
-  tempArray = tempArray.filter((film) => {
-    return film.title.indexOf(this.value) >= 0;
-  });
-  renderList(tempArray);
-} */
-
-/* function sortByName() {
-  listMovies.innerHTML = null;
-  tempArray = tempData.data.movies;
-  tempArray.sort((a, b) => {
-    return a.title > b.title ? 1 : -1;
-  });
-  renderList(tempArray);
-} */
-
-
 let inTheaters = document.querySelector('.btn-in-theaters');
 inTheaters.addEventListener('click', filterInTheaters);
 function filterInTheaters() {
@@ -689,7 +661,7 @@ function filmCard(film) {
   <p>Director: ${film.directors[0].name}</p>    
   </div>
   <div class="card-action">
-  <a class="filmPageLink" name="${film.title} href="" >Show film page</a>
+  <a class="filmPageLink" name="${film.title}" >Show film page</a>
   </div>
   <div class="card-reveal">
     <span class="card-title grey-text text-darken-4">${film.title}<i class="material-icons right">close</i></span>
@@ -703,7 +675,7 @@ function filmCard(film) {
 function addEvents() {
   let filmPageLinks = document.querySelectorAll('.filmPageLink');
   filmPageLinks.forEach((element) => {
-    element.addEventListener('click', goToFilmPage)
+    element.addEventListener('click', goToFilmPage);
   });
 }
 
@@ -732,10 +704,8 @@ function renderList(list) {
 }
 
 function goToFilmPage(event) {
-    event.preventDefault();
   window.location.hash = this.name;
-/*  localStorage.setItem("filmTitle", this.name);
-  localStorage.setItem("filmIndex", tempData.data.movies.findIndex(item => item.title === window.location.hash));*/
+  window.location.reload();
 }
 
 renderInRows(tempData.data.movies, 4);

@@ -1,3 +1,5 @@
+import {init} from "../app";
+
 function mainJS() {
 let tempData = {
   "data": {
@@ -705,7 +707,7 @@ function renderList(list) {
 
 function goToFilmPage(event) {
   window.location.hash = this.name;
-  window.location.reload();
+    init();
 }
 
 renderInRows(tempData.data.movies, 4);

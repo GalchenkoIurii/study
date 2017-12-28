@@ -1,3 +1,5 @@
+import {init} from "../app";
+
 function filmDetails() {
 
 let tempData = {
@@ -667,7 +669,7 @@ function createFilmCard(film) {
           <p>Plot: ${film.plot}</p>
         </div>
         <div class="card-action">
-          <a href="index.html">go back</a>
+          <a class="goBackLink" >go back</a>
         </div>
       </div>
     </div>
@@ -675,7 +677,22 @@ function createFilmCard(film) {
     filmContainer.insertAdjacentHTML('beforeend', html);
 }
     
-createFilmCard(tempData.data.movies[tempData.data.movies.findIndex(item => item.title === urlToString(window.location.hash))]);
+function addEvents() {
+  let filmPageLinks = document.querySelectorAll('.goBackLink');
+  filmPageLinks.forEach((element) => {
+    element.addEventListener('click', goToMainPage);
+  });
 }
+    
+function goToMainPage(event) {
+    window.location.hash = "main";
+    init();
+}
+    
+createFilmCard(tempData.data.movies[tempData.data.movies.findIndex(item => item.title === urlToString(window.location.hash))]);
+    
+addEvents();
+}
+
 
 export default filmDetails;

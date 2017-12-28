@@ -70,6 +70,11 @@
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.init = init;
+
 var _main = __webpack_require__(1);
 
 var _main2 = _interopRequireDefault(_main);
@@ -104,6 +109,9 @@ init();
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _app = __webpack_require__(0);
+
 function mainJS() {
   var tempData = {
     "data": {
@@ -798,7 +806,7 @@ function mainJS() {
 
   function goToFilmPage(event) {
     window.location.hash = this.name;
-    window.location.reload();
+    (0, _app.init)();
   }
 
   renderInRows(tempData.data.movies, 4);
@@ -816,6 +824,9 @@ exports.default = mainJS;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _app = __webpack_require__(0);
+
 function filmDetails() {
 
     var tempData = {
@@ -1468,13 +1479,27 @@ function filmDetails() {
             var str = '';
             return str += " " + element.name;
         });
-        var html = "<div class=\"col s12 m7\">\n    <h2 class=\"header\">" + film.title + " (" + film.year + ")</h2>\n    <div class=\"card horizontal\">\n      <div class=\"card-image\">\n        <img src=" + film.urlPoster + ">\n      </div>\n      <div class=\"card-stacked\">\n        <div class=\"card-content\">\n          <p>Genre: " + genres + "</p>\n          <p>Directors: " + directors + "</p>\n          <p>Writers: " + writers + "</p>\n          <p>Runtime: " + film.runtime + "</p>\n          <p>Rating: " + film.rating + "</p>\n          <p>Votes: " + film.votes + "</p>\n          <br>      \n          <p>Plot: " + film.plot + "</p>\n        </div>\n        <div class=\"card-action\">\n          <a href=\"index.html\">go back</a>\n        </div>\n      </div>\n    </div>\n  </div>";
+        var html = "<div class=\"col s12 m7\">\n    <h2 class=\"header\">" + film.title + " (" + film.year + ")</h2>\n    <div class=\"card horizontal\">\n      <div class=\"card-image\">\n        <img src=" + film.urlPoster + ">\n      </div>\n      <div class=\"card-stacked\">\n        <div class=\"card-content\">\n          <p>Genre: " + genres + "</p>\n          <p>Directors: " + directors + "</p>\n          <p>Writers: " + writers + "</p>\n          <p>Runtime: " + film.runtime + "</p>\n          <p>Rating: " + film.rating + "</p>\n          <p>Votes: " + film.votes + "</p>\n          <br>      \n          <p>Plot: " + film.plot + "</p>\n        </div>\n        <div class=\"card-action\">\n          <a class=\"goBackLink\" >go back</a>\n        </div>\n      </div>\n    </div>\n  </div>";
         filmContainer.insertAdjacentHTML('beforeend', html);
+    }
+
+    function addEvents() {
+        var filmPageLinks = document.querySelectorAll('.goBackLink');
+        filmPageLinks.forEach(function (element) {
+            element.addEventListener('click', goToMainPage);
+        });
+    }
+
+    function goToMainPage(event) {
+        window.location.hash = "main";
+        (0, _app.init)();
     }
 
     createFilmCard(tempData.data.movies[tempData.data.movies.findIndex(function (item) {
         return item.title === urlToString(window.location.hash);
     })]);
+
+    addEvents();
 }
 
 exports.default = filmDetails;

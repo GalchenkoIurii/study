@@ -1,7 +1,7 @@
 import mainJS from "./js/main";
 import filmDetails from "./js/filmDetails";
 
-function init() {
+export function init() {
     if (window.location.hash === "") {
         window.location.hash = "#main";
     }

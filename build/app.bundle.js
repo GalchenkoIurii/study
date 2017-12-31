@@ -1186,6 +1186,10 @@ var _data = __webpack_require__(1);
 
 var _data2 = _interopRequireDefault(_data);
 
+var _navbarEvents = __webpack_require__(5);
+
+var _navbarEvents2 = _interopRequireDefault(_navbarEvents);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function mainJS() {
@@ -1202,9 +1206,7 @@ function mainJS() {
 
   var listMovies = document.querySelector('.list-movies');
   listMovies.innerHTML = null;
-
-  var inTheaters = document.querySelector('.btn-in-theaters');
-  inTheaters.addEventListener('click', filterInTheaters);
+  (0, _navbarEvents2.default)();
 
   function filmCard(film) {
     var html = "\n  <div class=\"card col s3\">\n  <div class=\"card-image waves-effect waves-block waves-light\">\n    <img class=\"activator\" src=" + film.urlPoster + ">\n  </div>\n  <div class=\"card-content\"><span class=\"card-title activator grey-text text-darken-4\">" + film.title + " (" + film.year + ")<i class=\"material-icons right\">more_vert</i></span>\n  <p>Director: " + film.directors[0].name + "</p>    \n  </div>\n  <div class=\"card-action\">\n  <a class=\"filmPageLink\" name=\"" + film.title + "\" >Show film page</a>\n  </div>\n  <div class=\"card-reveal\">\n    <span class=\"card-title grey-text text-darken-4\">" + film.title + "<i class=\"material-icons right\">close</i></span>\n    <p>" + film.plot + "</p>\n  </div>\n  </div>\n  ";
@@ -1240,13 +1242,8 @@ function mainJS() {
     }
   }
 
-  function goToFilmPage(event) {
+  function goToFilmPage() {
     window.location.hash = this.name;
-    (0, _app.init)();
-  }
-
-  function filterInTheaters() {
-    window.location.hash = "inTheaters";
     (0, _app.init)();
   }
 
@@ -1272,12 +1269,17 @@ var _data = __webpack_require__(1);
 
 var _data2 = _interopRequireDefault(_data);
 
+var _navbarEvents = __webpack_require__(5);
+
+var _navbarEvents2 = _interopRequireDefault(_navbarEvents);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function filmDetails() {
 
   var listMovies = document.querySelector('.list-movies');
   listMovies.innerHTML = null;
+  (0, _navbarEvents2.default)();
 
   function urlToString(url) {
     return url.slice(1).replace(/%20/g, " ");
@@ -1308,9 +1310,9 @@ function filmDetails() {
     if (_data2.default.data.movies[_data2.default.data.movies.findIndex(function (item) {
       return item.title === urlToString(window.location.hash);
     })]) {
-      window.location.hash = "main";
+      window.location.hash = "#main";
     } else {
-      window.location.hash = "inTheaters";
+      window.location.hash = "#inTheaters";
     }
     (0, _app.init)();
   }
@@ -1351,15 +1353,20 @@ var _data = __webpack_require__(1);
 
 var _data2 = _interopRequireDefault(_data);
 
+var _navbarEvents = __webpack_require__(5);
+
+var _navbarEvents2 = _interopRequireDefault(_navbarEvents);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function inTheaters() {
 
     var listMovies = document.querySelector('.list-movies');
     listMovies.innerHTML = null;
+    (0, _navbarEvents2.default)();
 
     function filmCard(film) {
-        var html = "\n    <div class=\"card col s3\">\n    <div class=\"card-image waves-effect waves-block waves-light\">\n      <img class=\"activator\" src=" + film.urlPoster + ">\n    </div>\n    <div class=\"card-content\"><span class=\"card-title activator grey-text text-darken-4\">" + film.title + " (" + film.year + ")<i class=\"material-icons right\">more_vert</i></span>\n    <p>Director: " + film.directors[0].name + "</p>    \n    </div>\n    <div class=\"card-action\">\n    <a class=\"filmPageLink\" name=\"" + film.title + "\" >Show film page</a>\n    </div>\n    <div class=\"card-reveal\">\n      <span class=\"card-title grey-text text-darken-4\">" + film.title + "<i class=\"material-icons right\">close</i></span>\n      <p>" + film.plot + "</p>\n    </div>\n    </div>\n    ";
+        var html = "<div class=\"card col s3\">\n    <div class=\"card-image waves-effect waves-block waves-light\">\n      <img class=\"activator\" src=" + film.urlPoster + ">\n    </div>\n    <div class=\"card-content\"><span class=\"card-title activator grey-text text-darken-4\">" + film.title + " (" + film.year + ")<i class=\"material-icons right\">more_vert</i></span>\n    <p>Director: " + film.directors[0].name + "</p>    \n    </div>\n    <div class=\"card-action\">\n    <a class=\"filmPageLink\" name=\"" + film.title + "\" >Show film page</a>\n    </div>\n    <div class=\"card-reveal\">\n      <span class=\"card-title grey-text text-darken-4\">" + film.title + "<i class=\"material-icons right\">close</i></span>\n      <p>" + film.plot + "</p>\n    </div>\n    </div>";
         return html;
     }
 
@@ -1374,7 +1381,9 @@ function inTheaters() {
         var _loop = function _loop(i) {
             var row = [];
             for (var j = 0; j < itemsInRow; j++) {
-                row.push(arr[i + j]);
+                if (arr[i + j]) {
+                    row.push(arr[i + j]);
+                }
             }
             var rowDiv = document.createElement('div');
             rowDiv.classList.add('row');
@@ -1392,8 +1401,8 @@ function inTheaters() {
         }
     }
 
-    function goToFilmPage(event) {
-        window.location.hash = this.name;
+    function goToFilmPage() {
+        window.location.hash = "#" + this.name;
         (0, _app.init)();
     }
 
@@ -1402,6 +1411,34 @@ function inTheaters() {
 }
 
 exports.default = inTheaters;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _app = __webpack_require__(0);
+
+function addNavbarEvents() {
+    var navbar = document.querySelector('.navbar-fixed');
+    navbar.outerHTML = navbar.outerHTML;
+
+    var inTheaters = document.querySelector('.btn-in-theaters');
+    inTheaters.addEventListener('click', filterInTheaters);
+
+    function filterInTheaters() {
+        window.location.hash = "#inTheaters";
+        (0, _app.init)();
+    }
+}
+
+exports.default = addNavbarEvents;
 
 /***/ })
 /******/ ]);

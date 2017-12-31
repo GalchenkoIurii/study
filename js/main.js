@@ -1,5 +1,7 @@
 import {init} from "../app";
 import filmData from "./data";
+import addNavbarEvents from "./navbarEvents";
+
 
 function mainJS() {
 
@@ -15,9 +17,7 @@ console.log(filmData);
 
 let listMovies = document.querySelector('.list-movies');
 listMovies.innerHTML = null;
-
-let inTheaters = document.querySelector('.btn-in-theaters');
-inTheaters.addEventListener('click', filterInTheaters);
+addNavbarEvents();
 
 function filmCard(film) {
   let html = `
@@ -65,15 +65,11 @@ function renderInRows(arr, itemsInRow) {
   }
 }
 
-function goToFilmPage(event) {
+function goToFilmPage() {
   window.location.hash = this.name;
   init();
 }
 
-function filterInTheaters() {
-  window.location.hash = "inTheaters";
-  init();
-}
 
 renderInRows(filmData.data.movies, 4);
 }

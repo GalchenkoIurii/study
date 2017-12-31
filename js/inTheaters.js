@@ -1,14 +1,15 @@
 import {init} from "../app";
 import filmData from "./data";
+import addNavbarEvents from "./navbarEvents";
 
 function inTheaters() {
 
     let listMovies = document.querySelector('.list-movies');
     listMovies.innerHTML = null;
+    addNavbarEvents();
 
     function filmCard(film) {
-        let html = `
-    <div class="card col s3">
+       let html = `<div class="card col s3">
     <div class="card-image waves-effect waves-block waves-light">
       <img class="activator" src=${film.urlPoster}>
     </div>
@@ -22,8 +23,7 @@ function inTheaters() {
       <span class="card-title grey-text text-darken-4">${film.title}<i class="material-icons right">close</i></span>
       <p>${film.plot}</p>
     </div>
-    </div>
-    `;
+    </div>`;
         return html;
     }
 
@@ -38,7 +38,9 @@ function inTheaters() {
         for (let i = 0; i < arr.length; i += itemsInRow) {
             let row = [];
             for (let j = 0; j < itemsInRow; j++) {
-                row.push(arr[i + j]);
+                if (arr[i + j]) {
+                    row.push(arr[i + j]);
+                }    
             }
             let rowDiv = document.createElement('div');
             rowDiv.classList.add('row');
@@ -52,8 +54,8 @@ function inTheaters() {
         }
     }
 
-    function goToFilmPage(event) {
-        window.location.hash = this.name;
+    function goToFilmPage() {
+        window.location.hash = "#" + this.name;
         init();
     }
 

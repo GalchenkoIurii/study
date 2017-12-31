@@ -1,16 +1,16 @@
 import {init} from "../app";
 import filmData from "./data";
+import addNavbarEvents from "./navbarEvents";
 
 function filmDetails() {
 
 let listMovies = document.querySelector('.list-movies');
 listMovies.innerHTML = null;
+addNavbarEvents();
 
 function urlToString(url) {
     return url.slice(1).replace(/%20/g, " ");
 }
-
-
 
 function createFilmCard(film) {
     let genres = film.genres.join(", ");
@@ -58,9 +58,9 @@ function addEvents() {
     
 function goBack() {
   if (filmData.data.movies[filmData.data.movies.findIndex(item => item.title === urlToString(window.location.hash))]) {
-    window.location.hash = "main";
+    window.location.hash = "#main";
   } else {
-    window.location.hash = "inTheaters";
+    window.location.hash = "#inTheaters";
   }
   init();
 }

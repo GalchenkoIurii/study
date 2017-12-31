@@ -200,7 +200,8 @@ let filmData = {
             },
             {
                 "inTheatersNow": "In Theaters Now",
-                "movies": [{
+                "movies": [
+                    {
                         "title": "Star Wars: The Last Jedi",
                         "originalTitle": "",
                         "year": "2017",
@@ -597,8 +598,7 @@ let filmData = {
                         "rated": "PG-13",
                         "votes": "1,484",
                         "type": "Movie"
-                    }
-                ]
+                    }]
             }
         ],
 
@@ -1226,5 +1226,6 @@ let filmData = {
         "serverTime": "2017/12/20 18:27:30"
     }
 };
+
 
 export default filmData;
